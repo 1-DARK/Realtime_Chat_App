@@ -3,12 +3,12 @@ import User from "../models/user.model.js";
 import bcrpyt from "bcryptjs";
 export const signup = async (req, res) => {
   const { fullName, email, password } = req.body;
-  if (!fullName || !email || !password) {
-    return res.status(400).json({
-      message: "Password must be at least 8 characters",
-    });
-  }
   try {
+    if (!fullName || !email || !password) {
+      return res.status(400).json({
+        message: "All fields are required",
+      });
+    }
     // hash password using bcryptjs
     if (password.length < 8) {
       return res.status(400).json({
