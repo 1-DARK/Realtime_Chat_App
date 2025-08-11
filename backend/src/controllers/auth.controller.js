@@ -51,7 +51,7 @@ export const login = async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({
-        message: "Invalid credentials",
+        message: "Email Not Found",
       });
     }
     const isPasswordCorrect = await bcrpyt.compare(password, user.password);
