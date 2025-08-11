@@ -57,7 +57,7 @@ export const login = async (req, res) => {
     const isPasswordCorrect = await bcrpyt.compare(password, user.password);
     if (!isPasswordCorrect) {
       return res.status(400).json({
-        message: "Invalid credentials",
+        message: "Wrong Password",
       });
     }
     generateToken(user._id, res);
@@ -82,6 +82,10 @@ export const logout = (req, res) => {
     return res.status(200).json({
       message: "Logged out Successfully",
     });
-  } catch (error) {}
-  res.send("logout route");
+  } catch (error) {
+    console.log("Error in logout controller", error.message);
+    return res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
 };
