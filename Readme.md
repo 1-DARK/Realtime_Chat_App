@@ -10,3 +10,4 @@
 # frontend
 
 - npm create vite@latest .
+- use tailwind css and daisy ui
