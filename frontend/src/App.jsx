@@ -2,14 +2,22 @@ import { useEffect, useRef } from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./component/Navbar";
-import Homepage from "./pages/Homepage";
+import HomePage from "./pages/Homepage";
+import SignUpPage from "./pages/SignUpPage";
+import LoginPage from "./pages/LoginPage";
+import SettingsPage from "./pages/SettingsPage";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   return (
     <div>
       <Navbar />
       <Routes>
-        <Route path="/home" element={<Homepage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </div>
   );
