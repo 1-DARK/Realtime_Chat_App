@@ -12,3 +12,4 @@
 - npm create vite@latest .
 - use tailwind css and daisy ui
 - npm i react-router-dom react-hot-toast
+- npm i axios zustand
