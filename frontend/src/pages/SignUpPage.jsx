@@ -181,33 +181,9 @@ const SignUpPage = () => {
             </div>
 
             {/* Submit Button */}
-            <div className="flex justify-center">
-              <button
-                type="submit"
-                className="btn btn-primary w-full max-w-xs"
-                disabled={isSigningUp}
-              >
-                {isSigningUp ? (
-                  <>
-                    <Loader2 className="size-5 animate-spin" />
-                    Loading...
-                  </>
-                ) : (
-                  "Create Account"
-                )}
-              </button>
-            </div>
           </form>
 
           {/* Sign in Link */}
-          <div className="text-center">
-            <p className="text-base-content/60">
-              Already have an account?{" "}
-              <Link to="/login" className="link link-primary">
-                Sign in
-              </Link>
-            </p>
-          </div>
         </div>
       </div>
 
