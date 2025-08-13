@@ -1,31 +1,27 @@
-import React from "react";
 import { useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
-import {
-  Eye,
-  EyeOff,
-  Loader2,
-  MessageSquare,
-  User,
-  Mail,
-  Lock,
-} from "lucide-react";
+import { Eye, EyeOff, Loader2, MessageSquare } from "lucide-react";
+import { Link } from "react-router-dom";
+
+import toast from "react-hot-toast";
+
 const SignUpPage = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
     password: "",
   });
+
+  const { signup, isSigningUp } = useAuthStore();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const success = validateForm();
-
-    if (success === true) signup(formData);
   };
+
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
-      {/* left side */}
+      {/* Left side */}
       <div className="flex flex-col justify-center items-center p-6 sm:p-12">
         <div className="w-full max-w-md space-y-8">
           {/* LOGO */}
@@ -43,51 +39,180 @@ const SignUpPage = () => {
               </p>
             </div>
           </div>
+
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Full Name Field */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-medium">Full Name</span>
               </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <User className="size-5 text-base-content/40" />
-                </div>
-                <input
-                  type="text"
-                  className={`input input-bordered w-full pl-10`}
-                  placeholder="John Doe"
-                  value={formData.fullName}
-                  onChange={(e) =>
-                    setFormData({ ...formData, fullName: e.target.value })
-                  }
-                />
+              <div className="relative flex justify-center">
+                <label className="input validator w-full">
+                  <svg
+                    className="h-[1em] opacity-50"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                  >
+                    <g
+                      strokeLinejoin="round"
+                      strokeLinecap="round"
+                      strokeWidth="2.5"
+                      fill="none"
+                      stroke="currentColor"
+                    >
+                      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </g>
+                  </svg>
+                  <input
+                    type="text"
+                    placeholder="John Doe"
+                    value={formData.fullName}
+                    onChange={(e) =>
+                      setFormData({ ...formData, fullName: e.target.value })
+                    }
+                    required
+                    pattern="[A-Za-z][A-Za-z0-9\-]*"
+                    minLength="3"
+                    maxLength="30"
+                    title="Only letters, numbers or dash"
+                    disabled={isSigningUp}
+                    className="w-full"
+                  />
+                </label>
               </div>
             </div>
 
+            {/* Email Field */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-medium">Email</span>
               </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="size-5 text-base-content/40" />
-                </div>
-                <input
-                  type="email"
-                  className={`input input-bordered w-full pl-10`}
-                  placeholder="you@example.com"
-                  value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
-                  }
-                />
+              <div className="relative flex justify-center">
+                <label className="input validator w-full">
+                  <svg
+                    className="h-[1em] opacity-50"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                  >
+                    <g
+                      strokeLinejoin="round"
+                      strokeLinecap="round"
+                      strokeWidth="2.5"
+                      fill="none"
+                      stroke="currentColor"
+                    >
+                      <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                    </g>
+                  </svg>
+                  <input
+                    type="email"
+                    placeholder="mail@site.com"
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                    required
+                    disabled={isSigningUp}
+                    className="w-full"
+                  />
+                </label>
               </div>
             </div>
+
+            {/* Password Field */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-medium">Password</span>
+              </label>
+              <div className="relative flex justify-center">
+                <label className="input validator w-full">
+                  <svg
+                    className="h-[1em] opacity-50"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                  >
+                    <g
+                      strokeLinejoin="round"
+                      strokeLinecap="round"
+                      strokeWidth="2.5"
+                      fill="none"
+                      stroke="currentColor"
+                    >
+                      <path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"></path>
+                      <circle
+                        cx="16.5"
+                        cy="7.5"
+                        r=".5"
+                        fill="currentColor"
+                      ></circle>
+                    </g>
+                  </svg>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={formData.password}
+                    onChange={(e) =>
+                      setFormData({ ...formData, password: e.target.value })
+                    }
+                    required
+                    placeholder="Password"
+                    minLength="8"
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                    title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
+                    disabled={isSigningUp}
+                    className="w-full"
+                  />
+                </label>
+
+                <button
+                  type="button"
+                  className="absolute inset-y-0 right-4 flex items-center"
+                  onClick={() => setShowPassword(!showPassword)}
+                  disabled={isSigningUp}
+                >
+                  {showPassword ? (
+                    <EyeOff className="size-5 text-base-content/40" />
+                  ) : (
+                    <Eye className="size-5 text-base-content/40" />
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {/* Submit Button */}
+            <div className="flex justify-center">
+              <button
+                type="submit"
+                className="btn btn-primary w-full max-w-xs"
+                disabled={isSigningUp}
+              >
+                {isSigningUp ? (
+                  <>
+                    <Loader2 className="size-5 animate-spin" />
+                    Loading...
+                  </>
+                ) : (
+                  "Create Account"
+                )}
+              </button>
+            </div>
           </form>
+
+          {/* Sign in Link */}
+          <div className="text-center">
+            <p className="text-base-content/60">
+              Already have an account?{" "}
+              <Link to="/login" className="link link-primary">
+                Sign in
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
+
+      {/* Right side - Placeholder for image/illustration */}
     </div>
   );
 };
-
 export default SignUpPage;
