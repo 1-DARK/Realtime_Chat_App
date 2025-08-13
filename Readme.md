@@ -6,6 +6,7 @@
 - mongo harsh ()
 - cloudinary for image stored go to dashboard copy cloud name and use it
 - in env create jwt secret by using this command node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+- install cors (npm i cors)
 
 # frontend
 
