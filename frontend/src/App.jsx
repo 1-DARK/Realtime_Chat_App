@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import "./App.css";
 import { Navigate, Route, Routes } from "react-router-dom";
-import Navbar from "./component/Navbar";
+
 import HomePage from "./pages/Homepage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
@@ -10,6 +10,7 @@ import ProfilePage from "./pages/ProfilePage";
 import { useAuthStore } from "./store/useAuthStore";
 import { Loader } from "lucide-react";
 import { Toaster } from "react-hot-toast";
+import Navbar from "./components/Navbar";
 function App() {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
   useEffect(() => {
