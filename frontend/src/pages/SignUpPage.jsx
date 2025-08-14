@@ -1,10 +1,18 @@
 import { useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
-import { Eye, EyeOff, Loader2, MessageSquare } from "lucide-react";
+import {
+  Eye,
+  EyeOff,
+  Loader2,
+  Lock,
+  Mail,
+  MessageSquare,
+  User,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 
-import toast from "react-hot-toast";
 import AuthImagePattern from "../component/AuthImagePattern";
+import toast from "react-hot-toast";
 
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -16,13 +24,29 @@ const SignUpPage = () => {
 
   const { signup, isSigningUp } = useAuthStore();
 
+  const validateForm = () => {
+    if (!formData.fullName.trim()) return toast.error("Full name is required");
+    if (!formData.email.trim()) return toast.error("Email is required");
+    if (!/\S+@\S+\.\S+/.test(formData.email))
+      return toast.error("Invalid email format");
+    if (!formData.password) return toast.error("Password is required");
+    if (formData.password.length < 8)
+      return toast.error("Password must be at least 6 characters");
+
+    return true;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const success = validateForm();
+
+    if (success === true) signup(formData);
   };
 
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
-      {/* Left side */}
+      {/* left side */}
       <div className="flex flex-col justify-center items-center p-6 sm:p-12">
         <div className="w-full max-w-md space-y-8">
           {/* LOGO */}
@@ -42,7 +66,6 @@ const SignUpPage = () => {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Full Name Field */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-medium">Full Name</span>
@@ -72,11 +95,6 @@ const SignUpPage = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, fullName: e.target.value })
                     }
-                    required
-                    pattern="[A-Za-z][A-Za-z0-9\-]*"
-                    minLength="3"
-                    maxLength="30"
-                    title="Only letters, numbers or dash"
                     disabled={isSigningUp}
                     className="w-full"
                   />
@@ -114,7 +132,6 @@ const SignUpPage = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
                     }
-                    required
                     disabled={isSigningUp}
                     className="w-full"
                   />
@@ -156,11 +173,7 @@ const SignUpPage = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, password: e.target.value })
                     }
-                    required
                     placeholder="Password"
-                    minLength="8"
-                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                    title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
                     disabled={isSigningUp}
                     className="w-full"
                   />
@@ -181,26 +194,22 @@ const SignUpPage = () => {
               </div>
             </div>
 
-            {/* Submit Button */}
-            <div className="flex justify-center">
-              <button
-                type="submit"
-                className="btn btn-primary w-full max-w-xs"
-                disabled={isSigningUp}
-              >
-                {isSigningUp ? (
-                  <>
-                    <Loader2 className="size-5 animate-spin" />
-                    Loading...
-                  </>
-                ) : (
-                  "Create Account"
-                )}
-              </button>
-            </div>
+            <button
+              type="submit"
+              className="btn btn-primary w-full"
+              disabled={isSigningUp}
+            >
+              {isSigningUp ? (
+                <>
+                  <Loader2 className="size-5 animate-spin" />
+                  Loading...
+                </>
+              ) : (
+                "Create Account"
+              )}
+            </button>
           </form>
 
-          {/* Sign in Link */}
           <div className="text-center">
             <p className="text-base-content/60">
               Already have an account?{" "}
@@ -212,7 +221,8 @@ const SignUpPage = () => {
         </div>
       </div>
 
-      {/* Right side - Placeholder for image/illustration */}
+      {/* right side */}
+
       <AuthImagePattern
         title="Join our community"
         subtitle="Connect with friends, share moments, and stay in touch with your loved ones."
