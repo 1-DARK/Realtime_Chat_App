@@ -60,4 +60,5 @@ export const useAuthStore = create((set, get) => ({
       console.log(error.response.data.message);
     }
   },
+  updateProfile: async (data) => {},
 }));
