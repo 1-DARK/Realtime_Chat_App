@@ -9,7 +9,6 @@ const ProfilePage = () => {
           </div>
 
           {/*Avatar Upload */}
-
           <div className="mt-6 bg-base-300 rounded-xl p-6">
             <h2 className="text-lg font-medium  mb-4">Account Information</h2>
             <div className="space-y-3 text-sm">
