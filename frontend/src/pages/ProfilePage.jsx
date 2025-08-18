@@ -94,7 +94,11 @@ const ProfilePage = () => {
               <div className="flex items-center justify-between py-2 border-b border-zinc-700">
                 <span>Member Since</span>
                 <span className="text-blue-400">
-                  {authUser?.createdAt?.substring(0, 4)}
+                  {authUser?.createdAt
+                    ?.substring(0, 10)
+                    .split("-")
+                    .reverse()
+                    .join("-")}
                 </span>
               </div>
               <div className="flex items-center justify-between py-2">
