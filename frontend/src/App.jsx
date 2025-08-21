@@ -14,7 +14,7 @@ import Navbar from "./components/Navbar";
 import { useThemeStore } from "./store/useThemeStore.js";
 function App() {
   const { authUser, checkAuth, isCheckingAuth, onlineUsers } = useAuthStore();
-  console.log(onlineUsers);
+  console.log({ onlineUsers });
   const { theme } = useThemeStore();
   useEffect(() => {
     checkAuth();

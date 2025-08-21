@@ -50,7 +50,7 @@ export const useAuthStore = create((set, get) => ({
     } catch (error) {
       toast.error(error.response.data.message);
     } finally {
-      set({ isLoggingIn: flase });
+      set({ isLoggingIn: false });
     }
   },
   logout: async () => {
@@ -88,7 +88,7 @@ export const useAuthStore = create((set, get) => ({
     socket.connect();
 
     set({ socket: socket });
-    socket.on("GetOnlineUsers", (userIds) => {
+    socket.on("getOnlineUsers", (userIds) => {
       set({ onlineUsers: userIds });
     });
   },
