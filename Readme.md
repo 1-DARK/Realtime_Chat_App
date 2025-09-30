@@ -1,4 +1,4 @@
- # ✨ Full Stack Realtime Chat App ✨
+# Full Stack Realtime Chat App
 
 A full-stack real-time chat application built with a Node.js/Express backend and React frontend, utilizing Socket.IO for seamless, bidirectional communication.
 
@@ -17,14 +17,14 @@ This project is a robust real-time chat application that includes image uploads,
 
 ---
 
-- 🌟 **Tech Stack:** MERN + Socket.io + Tailwind CSS + DaisyUI
-- 🎃 **Authentication & Authorization:** Secured with JWT
-- 👾 **Real-Time Messaging:** Powered by Socket.io
-- 🚀 **Online User Status:** Track active users in real-time
-- 👌 **Global State Management:** Handled with Zustand
-- 🐞 **Error Handling:** Comprehensive on both server and client sides
-- ⭐ **Deployment:** Step-by-step guide for free professional deployment
-- ⏳ **And Much More!** Explore additional features like image uploads and more
+- **Tech Stack:** MERN + Socket.io + Tailwind CSS + DaisyUI
+- **Authentication & Authorization:** Secured with JWT
+- **Real-Time Messaging:** Powered by Socket.io
+- **Online User Status:** Track active users in real-time
+- **Global State Management:** Handled with Zustand
+- **Error Handling:** Comprehensive on both server and client sides
+- **Deployment:** Step-by-step guide for free professional deployment
+- **And Much More!** Explore additional features like image uploads and more
 
 ---
 
@@ -44,11 +44,13 @@ Before getting started, ensure you have the following installed:
 ### Backend
 
 1. Navigate to the backend directory:
+
    ```bash
    cd backend
    ```
 
 2. Initialize the project and install dependencies:
+
    ```bash
    npm init -y
    npm install express mongoose dotenv jsonwebtoken bcryptjs cookie-parser cloudinary socket.io cors
@@ -58,6 +60,7 @@ Before getting started, ensure you have the following installed:
 3. Configure environment variables (see [Environment Variables](#environment-variables) section below).
 
 4. Seed the database with initial users:
+
    ```bash
    node src/seeds/user.seed.js
    ```
@@ -71,16 +74,19 @@ Before getting started, ensure you have the following installed:
 ### Frontend
 
 1. Navigate to the frontend directory:
+
    ```bash
    cd frontend
    ```
 
 2. If starting fresh, scaffold with Vite (skip if the project is already set up):
+
    ```bash
    npm create vite@latest .
    ```
 
 3. Install dependencies:
+
    ```bash
    npm install react-router-dom react-hot-toast axios zustand lucide-react socket.io-client
    npm install --save-dev tailwindcss daisyui
@@ -120,6 +126,7 @@ NODE_ENV=development
 ```
 
 To generate a secure `JWT_SECRET`, run:
+
 ```bash
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 ```
@@ -130,10 +137,10 @@ This ensures strong encryption for your JWT tokens.
 
 ## Available Scripts
 
-| Directory | Command       | Purpose                              |
-|-----------|---------------|--------------------------------------|
-| Backend   | `npm run dev` | Starts the backend with nodemon      |
-| Frontend  | `npm run dev` | Starts the Vite development server   |
+| Directory | Command       | Purpose                            |
+| --------- | ------------- | ---------------------------------- |
+| Backend   | `npm run dev` | Starts the backend with nodemon    |
+| Frontend  | `npm run dev` | Starts the Vite development server |
 
 ### Building the App
 
