@@ -1,4 +1,4 @@
-# Full Stack Realtime Chat App
+# Chatty
 
 A full-stack real-time chat application built with a Node.js/Express backend and React frontend, utilizing Socket.IO for seamless, bidirectional communication.
 
